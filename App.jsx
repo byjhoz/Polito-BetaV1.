@@ -3,7 +3,7 @@ import { useState } from "react";
 // ─── CLAVE API ────────────────────────────────────────────────────────────────
 // IMPORTANTE: Reemplaza con tu clave real de Google Gemini
 // Obtén una GRATIS en: aistudio.google.com → Get API Key
-const GEMINI_API_KEY = "AIzaSyBu3rE0PdHiqs4KgCjW_JyicFcqeXtWzxQ";
+const GEMINI_API_KEY = "AIzaSyDkhaVyucyfVkP6r4aTtowYXwgjzMBBFIY";
 
 // ─── DATOS SIMULADOS ──────────────────────────────────────────────────────────
 // En producción: estos datos vienen del RPA que consulta sistemas reales PNP
