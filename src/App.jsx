@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const GEMINI_API_KEY = "TU_CLAVE_GEMINI_AQUI";
+const GEMINI_API_KEY = "AIzaSyDkhaVyucyfVkP6r4aTtowYXwgjzMBBFIY";
 
 const FORMATOS_PNP = {
   INTERVENCION: `ACTA DE INTERVENCIÓN POLICIAL
