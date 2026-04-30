@@ -446,16 +446,36 @@ HECHOS: ${situacion||"Intervención de control de tránsito."}
 
 Completa TODOS los campos de la plantilla ${tipo} con estos datos.`;
 
-    try {
-      const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,{
-        method:"POST",headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({system_instruction:{parts:[{text:buildSystemPrompt(tipo)}]},contents:[{role:"user",parts:[{text:prompt}]}],generationConfig:{maxOutputTokens:1024,temperature:0.2}})
-      });
-      const d=await res.json();
-      setActa(d.candidates?.[0]?.content?.parts?.[0]?.text||"Error al generar. Verifica tu clave API de Gemini.");
-    } catch {
-      setActa("Error de conexión. Verifica tu internet.");
+   try {
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`,
+    {
+      method: "POST",
+      headers: { 
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{ 
+            text: buildSystemPrompt(tipo) + "\n\n" + prompt 
+          }]
+        }],
+        generationConfig: { 
+          maxOutputTokens: 1024, 
+          temperature: 0.2 
+        }
+      })
     }
+  );
+  const d = await res.json();
+  if (d.error) {
+    setActa("Error API: " + d.error.message);
+  } else {
+    setActa(d.candidates?.[0]?.content?.parts?.[0]?.text || "Sin respuesta.");
+  }
+} catch(e) {
+  setActa("Error: " + e.message);
+}
     setLoading(false);
   };
 
